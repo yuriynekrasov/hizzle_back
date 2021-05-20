@@ -1,7 +1,7 @@
 export declare class CreatePropertyDto {
-    readonly id: number;
-    readonly kind: string;
-    readonly location: string;
-    readonly bedrooms: number;
-    readonly area: number;
+    id: number;
+    kind: string;
+    location: string;
+    bedrooms: number;
+    area: number;
 }

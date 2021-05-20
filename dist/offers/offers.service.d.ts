@@ -1,9 +1,7 @@
-import { CreateOfferDto } from './dto/create-offer.dto';
-import { Model } from 'mongoose';
-import { Offer, OfferDocument } from './schemas/offer.schema';
+import { Repository } from 'typeorm';
+import { Offers } from './entity/offer.entity';
 export declare class OffersService {
-    private offerModel;
-    constructor(offerModel: Model<OfferDocument>);
-    getAll(): Promise<Offer[]>;
-    create(offerDto: CreateOfferDto): Promise<Offer>;
+    private offerRepository;
+    constructor(offerRepository: Repository<Offers>);
+    getAll(): Promise<Offers[]>;
 }

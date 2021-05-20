@@ -1,37 +1,21 @@
-import { Controller, Get, Post, Param, Body, Delete, Put } from '@nestjs/common';
-import { CreatePropertyDto } from './dto/create-property.dto';
-import { UpdatePropertyDto } from './dto/update-property.dto';
+import { Controller, Get, Body, Post } from '@nestjs/common';
+import { Properties } from './entity/property.entity';
 import { PropertiesService } from './properties.service';
-import { Property } from './shemas/property.schema';
+import { CreatePropertyDto } from '../properties/dto/create-property.dto';
 
 @Controller('properties')
-export class PropertiesController {
+export class PropertyController {
 
-    constructor(private readonly propertiesService: PropertiesService) {
+    constructor(private readonly propertyService: PropertiesService) {
     }
 
     @Get()
-    getAll(): Promise<Property[]> {
-        return this.propertiesService.getAll()
-    }
-
-    @Get(':id')
-    getOne(@Param() params) {
-        return this.propertiesService.getOne(params.id)
+    getAll(): Promise<Properties[]> {
+        return this.propertyService.getAll();
     }
 
     @Post()
     create(@Body() createPropertyDto: CreatePropertyDto) {
-        return this.propertiesService.create(createPropertyDto)
-    }
-
-    @Delete(':id')
-    remove(@Param() params) {
-        return this.propertiesService.remove(params.id)
-    }
-
-    @Put(':id')
-    update(@Body() updatePropertyDto: UpdatePropertyDto, @Param() params) {
-        return this.propertiesService.update(params.id, updatePropertyDto)
+        return this.propertyService.create(createPropertyDto);
     }
 }

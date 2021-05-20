@@ -1,19 +1,13 @@
-import { Module } from "@nestjs/common";
-import { PropertiesService } from "./properties.service";
-import { PropertiesController } from "./properties.controller";
-import { MongooseModule } from "@nestjs/mongoose";
-import { Property, PropertySchema } from "./shemas/property.schema";
+import { Module } from '@nestjs/common';
+import { PropertiesService } from './properties.service';
+import { PropertyController } from './properties.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Properties } from './entity/property.entity';
 
 @Module({
+    imports: [ TypeOrmModule.forFeature([ Properties ]) ],
     providers: [ PropertiesService ],
-    controllers: [ PropertiesController ],
-    imports: [
-        MongooseModule.forFeature([
-            { name: Property.name, schema: PropertySchema  }
-        ])
-    ]
+    controllers: [ PropertyController ],
 })
 
-export class PropertiesModule {
-
-}
+export class PropertiesModule {}

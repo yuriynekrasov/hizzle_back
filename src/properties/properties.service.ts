@@ -1,32 +1,20 @@
-import { Injectable } from "@nestjs/common";
-import { CreatePropertyDto } from "./dto/create-property.dto";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model} from "mongoose";
-import { Property, PropertyDocument } from "./shemas/property.schema";
-import { UpdatePropertyDto } from "./dto/update-property.dto";
+import { Injectable, Body } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Properties } from './entity/property.entity';
 
 @Injectable()
 export class PropertiesService {
-    constructor(@InjectModel(Property.name) private propertyModel: Model<PropertyDocument>) {}
+    constructor(
+        @InjectRepository(Properties)
+        private propertyRepository: Repository<Properties>
+    ) {}
 
-    async getAll(): Promise<Property[]> {
-        return this.propertyModel.find().exec()
+    async getAll(): Promise<Properties[]> {
+        return this.propertyRepository.find();
     }
 
-    async getOne(id: number) {
-        return this.propertyModel.findById(id)
-    }
-
-    async create(propertyDto: CreatePropertyDto): Promise<Property> {
-        const newProperty = new this.propertyModel(propertyDto)
-        return newProperty.save()
-    }
-
-    async remove(id: number) {
-        return this.propertyModel.findByIdAndRemove(id)
-    }
-
-    async update(id: string, propertyDto: UpdatePropertyDto) {
-        return this.propertyModel.findByIdAndUpdate(id, propertyDto, {new: true})
+    async create(@Body() properties: Partial<Properties>): Promise<Properties> {
+        return await this.propertyRepository.save(new Properties(properties));
     }
 }

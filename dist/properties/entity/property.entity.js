@@ -9,30 +9,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OfferSchema = exports.Offer = void 0;
-const mongoose_1 = require("@nestjs/mongoose");
-const property_schema_1 = require("../../properties/shemas/property.schema");
-let Offer = class Offer {
+exports.Properties = void 0;
+const typeorm_1 = require("typeorm");
+let Properties = class Properties {
+    constructor(properties) {
+        Object.assign(this, properties);
+    }
 };
 __decorate([
-    mongoose_1.Prop(),
-    __metadata("design:type", Number)
-], Offer.prototype, "id", void 0);
+    typeorm_1.ObjectIdColumn(),
+    __metadata("design:type", typeorm_1.ObjectID)
+], Properties.prototype, "_id", void 0);
 __decorate([
-    mongoose_1.Prop(),
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Properties.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
     __metadata("design:type", String)
-], Offer.prototype, "offered_by", void 0);
+], Properties.prototype, "kind", void 0);
 __decorate([
-    mongoose_1.Prop(),
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Properties.prototype, "location", void 0);
+__decorate([
+    typeorm_1.Column(),
     __metadata("design:type", Number)
-], Offer.prototype, "price", void 0);
+], Properties.prototype, "bedrooms", void 0);
 __decorate([
-    mongoose_1.Prop({ type: property_schema_1.PropertySchema }),
-    __metadata("design:type", property_schema_1.Property)
-], Offer.prototype, "property", void 0);
-Offer = __decorate([
-    mongoose_1.Schema()
-], Offer);
-exports.Offer = Offer;
-exports.OfferSchema = mongoose_1.SchemaFactory.createForClass(Offer);
-//# sourceMappingURL=offer.schema.js.map
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Properties.prototype, "area", void 0);
+Properties = __decorate([
+    typeorm_1.Entity(),
+    __metadata("design:paramtypes", [Object])
+], Properties);
+exports.Properties = Properties;
+//# sourceMappingURL=property.entity.js.map

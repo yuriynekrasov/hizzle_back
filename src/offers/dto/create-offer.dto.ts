@@ -1,7 +1,7 @@
 export class CreateOfferDto {
     id: number
     offered_by: string
-    price: string
+    price: number
     property: {
         id: number
         kind: string

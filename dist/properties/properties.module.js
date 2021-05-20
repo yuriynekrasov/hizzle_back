@@ -10,19 +10,15 @@ exports.PropertiesModule = void 0;
 const common_1 = require("@nestjs/common");
 const properties_service_1 = require("./properties.service");
 const properties_controller_1 = require("./properties.controller");
-const mongoose_1 = require("@nestjs/mongoose");
-const property_schema_1 = require("./shemas/property.schema");
+const typeorm_1 = require("@nestjs/typeorm");
+const property_entity_1 = require("./entity/property.entity");
 let PropertiesModule = class PropertiesModule {
 };
 PropertiesModule = __decorate([
     common_1.Module({
+        imports: [typeorm_1.TypeOrmModule.forFeature([property_entity_1.Properties])],
         providers: [properties_service_1.PropertiesService],
-        controllers: [properties_controller_1.PropertiesController],
-        imports: [
-            mongoose_1.MongooseModule.forFeature([
-                { name: property_schema_1.Property.name, schema: property_schema_1.PropertySchema }
-            ])
-        ]
+        controllers: [properties_controller_1.PropertyController],
     })
 ], PropertiesModule);
 exports.PropertiesModule = PropertiesModule;

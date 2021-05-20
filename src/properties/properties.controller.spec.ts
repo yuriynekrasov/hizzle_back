@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PropertiesController } from './properties.controller';
+import { PropertyController } from './properties.controller';
 
-describe('PropertiesController', () => {
-  let controller: PropertiesController;
+describe('PropertyController', () => {
+    let controller: PropertyController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [PropertiesController],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            controllers: [PropertyController],
+        }).compile();
 
-    controller = module.get<PropertiesController>(PropertiesController);
-  });
+        controller = module.get<PropertyController>(PropertyController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
+    });
 });

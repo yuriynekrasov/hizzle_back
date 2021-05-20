@@ -10,19 +10,15 @@ exports.OffersModule = void 0;
 const common_1 = require("@nestjs/common");
 const offers_service_1 = require("./offers.service");
 const offers_controller_1 = require("./offers.controller");
-const mongoose_1 = require("@nestjs/mongoose");
-const offer_schema_1 = require("./schemas/offer.schema");
+const typeorm_1 = require("@nestjs/typeorm");
+const offer_entity_1 = require("./entity/offer.entity");
 let OffersModule = class OffersModule {
 };
 OffersModule = __decorate([
     common_1.Module({
+        imports: [typeorm_1.TypeOrmModule.forFeature([offer_entity_1.Offers])],
         providers: [offers_service_1.OffersService],
         controllers: [offers_controller_1.OffersController],
-        imports: [
-            mongoose_1.MongooseModule.forFeature([
-                { name: offer_schema_1.Offer.name, schema: offer_schema_1.OfferSchema }
-            ])
-        ]
     })
 ], OffersModule);
 exports.OffersModule = OffersModule;

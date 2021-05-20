@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Offer } from './schemas/offer.schema';
-import { CreateOfferDto } from './dto/create-offer.dto';
+import { Controller, Get, Post, } from '@nestjs/common';
+import { Offers } from './entity/offer.entity';
 import { OffersService } from './offers.service';
 
 @Controller('offers')
@@ -10,12 +9,8 @@ export class OffersController {
     }
 
     @Get()
-    getAll(): Promise<Offer[]> {
+    getAll(): Promise<Offers[]> {
         return this.offersService.getAll()
     }
 
-    @Post()
-    create(@Body() createOfferDto: CreateOfferDto) {
-        return this.offersService.create(createOfferDto)
-    }
 }

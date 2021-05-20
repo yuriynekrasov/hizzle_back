@@ -14,25 +14,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OffersService = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
-const offer_schema_1 = require("./schemas/offer.schema");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const offer_entity_1 = require("./entity/offer.entity");
 let OffersService = class OffersService {
-    constructor(offerModel) {
-        this.offerModel = offerModel;
+    constructor(offerRepository) {
+        this.offerRepository = offerRepository;
     }
     async getAll() {
-        return this.offerModel.find().exec();
-    }
-    async create(offerDto) {
-        const newOffer = new this.offerModel(offerDto);
-        return newOffer.save();
+        return this.offerRepository.find();
     }
 };
 OffersService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(offer_schema_1.Offer.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __param(0, typeorm_1.InjectRepository(offer_entity_1.Offers)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], OffersService);
 exports.OffersService = OffersService;
 //# sourceMappingURL=offers.service.js.map

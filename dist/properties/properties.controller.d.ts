@@ -1,13 +1,9 @@
-import { CreatePropertyDto } from './dto/create-property.dto';
-import { UpdatePropertyDto } from './dto/update-property.dto';
+import { Properties } from './entity/property.entity';
 import { PropertiesService } from './properties.service';
-import { Property } from './shemas/property.schema';
-export declare class PropertiesController {
-    private readonly propertiesService;
-    constructor(propertiesService: PropertiesService);
-    getAll(): Promise<Property[]>;
-    getOne(params: any): Promise<import("./shemas/property.schema").PropertyDocument>;
-    create(createPropertyDto: CreatePropertyDto): Promise<Property>;
-    remove(params: any): Promise<import("./shemas/property.schema").PropertyDocument>;
-    update(updatePropertyDto: UpdatePropertyDto, params: any): Promise<import("./shemas/property.schema").PropertyDocument>;
+import { CreatePropertyDto } from '../properties/dto/create-property.dto';
+export declare class PropertyController {
+    private readonly propertyService;
+    constructor(propertyService: PropertiesService);
+    getAll(): Promise<Properties[]>;
+    create(createPropertyDto: CreatePropertyDto): Promise<Properties>;
 }

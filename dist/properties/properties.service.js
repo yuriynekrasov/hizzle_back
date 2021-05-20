@@ -14,34 +14,30 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PropertiesService = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
-const property_schema_1 = require("./shemas/property.schema");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const property_entity_1 = require("./entity/property.entity");
 let PropertiesService = class PropertiesService {
-    constructor(propertyModel) {
-        this.propertyModel = propertyModel;
+    constructor(propertyRepository) {
+        this.propertyRepository = propertyRepository;
     }
     async getAll() {
-        return this.propertyModel.find().exec();
+        return this.propertyRepository.find();
     }
-    async getOne(id) {
-        return this.propertyModel.findById(id);
-    }
-    async create(propertyDto) {
-        const newProperty = new this.propertyModel(propertyDto);
-        return newProperty.save();
-    }
-    async remove(id) {
-        return this.propertyModel.findByIdAndRemove(id);
-    }
-    async update(id, propertyDto) {
-        return this.propertyModel.findByIdAndUpdate(id, propertyDto, { new: true });
+    async create(properties) {
+        return await this.propertyRepository.save(new property_entity_1.Properties(properties));
     }
 };
+__decorate([
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], PropertiesService.prototype, "create", null);
 PropertiesService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel(property_schema_1.Property.name)),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __param(0, typeorm_1.InjectRepository(property_entity_1.Properties)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], PropertiesService);
 exports.PropertiesService = PropertiesService;
 //# sourceMappingURL=properties.service.js.map

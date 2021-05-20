@@ -1,13 +1,8 @@
-import { CreatePropertyDto } from "./dto/create-property.dto";
-import { Model } from "mongoose";
-import { Property, PropertyDocument } from "./shemas/property.schema";
-import { UpdatePropertyDto } from "./dto/update-property.dto";
+import { Repository } from 'typeorm';
+import { Properties } from './entity/property.entity';
 export declare class PropertiesService {
-    private propertyModel;
-    constructor(propertyModel: Model<PropertyDocument>);
-    getAll(): Promise<Property[]>;
-    getOne(id: number): Promise<PropertyDocument>;
-    create(propertyDto: CreatePropertyDto): Promise<Property>;
-    remove(id: number): Promise<PropertyDocument>;
-    update(id: string, propertyDto: UpdatePropertyDto): Promise<PropertyDocument>;
+    private propertyRepository;
+    constructor(propertyRepository: Repository<Properties>);
+    getAll(): Promise<Properties[]>;
+    create(properties: Partial<Properties>): Promise<Properties>;
 }

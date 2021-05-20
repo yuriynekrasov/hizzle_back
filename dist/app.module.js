@@ -12,12 +12,24 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const offers_module_1 = require("./offers/offers.module");
 const properties_module_1 = require("./properties/properties.module");
-const mongoose_1 = require("@nestjs/mongoose");
+const typeorm_1 = require("@nestjs/typeorm");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [properties_module_1.PropertiesModule, offers_module_1.OffersModule, mongoose_1.MongooseModule.forRoot('mongodb+srv://Bogdan:Incode2015@cluster0.6kpev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')],
+        imports: [
+            offers_module_1.OffersModule,
+            properties_module_1.PropertiesModule,
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'mongodb',
+                url: 'mongodb+srv://Bogdan:Incode2015@cluster0.6kpev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+                logging: true,
+                useUnifiedTopology: true,
+                entities: [
+                    "dist/**/*.entity{.ts,.js}"
+                ]
+            })
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

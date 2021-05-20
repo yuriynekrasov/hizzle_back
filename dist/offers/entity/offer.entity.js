@@ -9,33 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PropertySchema = exports.Property = void 0;
-const mongoose_1 = require("@nestjs/mongoose");
-let Property = class Property {
+exports.Offers = void 0;
+const typeorm_1 = require("typeorm");
+const property_entity_1 = require("../../properties/entity/property.entity");
+let Offers = class Offers {
 };
 __decorate([
-    mongoose_1.Prop(),
+    typeorm_1.PrimaryColumn(),
     __metadata("design:type", Number)
-], Property.prototype, "id", void 0);
+], Offers.prototype, "_id", void 0);
 __decorate([
-    mongoose_1.Prop(),
+    typeorm_1.Column(),
+    __metadata("design:type", Number)
+], Offers.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column(),
     __metadata("design:type", String)
-], Property.prototype, "kind", void 0);
+], Offers.prototype, "offered_by", void 0);
 __decorate([
-    mongoose_1.Prop(),
-    __metadata("design:type", String)
-], Property.prototype, "location", void 0);
-__decorate([
-    mongoose_1.Prop(),
+    typeorm_1.Column(),
     __metadata("design:type", Number)
-], Property.prototype, "bedrooms", void 0);
+], Offers.prototype, "price", void 0);
 __decorate([
-    mongoose_1.Prop(),
-    __metadata("design:type", Number)
-], Property.prototype, "area", void 0);
-Property = __decorate([
-    mongoose_1.Schema()
-], Property);
-exports.Property = Property;
-exports.PropertySchema = mongoose_1.SchemaFactory.createForClass(Property);
-//# sourceMappingURL=property.schema.js.map
+    typeorm_1.Column(),
+    __metadata("design:type", property_entity_1.Properties)
+], Offers.prototype, "property", void 0);
+Offers = __decorate([
+    typeorm_1.Entity()
+], Offers);
+exports.Offers = Offers;
+//# sourceMappingURL=offer.entity.js.map
